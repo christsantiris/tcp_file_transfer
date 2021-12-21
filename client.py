@@ -37,11 +37,18 @@ def main():
             client.send(cmd.encode(FORMAT))
             break
         elif cmd == "LIST":
-            pass
+            client.send(cmd.encode(FORMAT))
         elif cmd == "UPLOAD":
-            pass
+            ## UPLOAD@filename@text
+            path = data[1]
+            with open(f"{path}", "r") as f:
+                text = f.read()
+                ## client_data/data.txt
+            filename = path.split("/")
+            send_data = f"{cmd}@{filename}@{text}"
+            client.send(send_data.encode(FORMAT))
         elif cmd == "DELETE":
-            pass
+            client.send(f"{cmd}@{data[1]}".encode(FORMAT))
             
     print("Disconnected from server.")
     client.close()

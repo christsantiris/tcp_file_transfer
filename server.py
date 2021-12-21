@@ -29,7 +29,15 @@ def handle_client(conn, addr):
         elif cmd == "LOGOUT":
             break
         elif cmd == "LIST":
-            pass
+            files = os.listdir(SERVER_DATA_PATH)
+            send_data = "OK@"
+
+            if len(files) == 0:
+                send_data += "There are no files on the server."
+                conn.send(send_data.encode(FORMAT))
+            else:
+                send_data += "\n".join(f for f in files)
+                conn.send(send_data.encode(FORMAT))
         elif cmd == "UPLOAD":
             pass
         elif cmd == "DELETE":
