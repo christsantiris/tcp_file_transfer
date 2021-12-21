@@ -41,7 +41,19 @@ def handle_client(conn, addr):
         elif cmd == "UPLOAD":
             pass
         elif cmd == "DELETE":
-            pass
+            files = os.listdir(SERVER_DATA_PATH)
+            send_data = "OK@"
+            filename = data[1]
+
+            if len(files) == 0:
+                send_data += "There are no files on the server."
+            else:
+                if filename in files:
+                    os.system(f"rm {SERVER_DATA_PATH}/{filename}")
+                    send_data += "File delete."
+                else:
+                    send_data += "File not found."
+            conn.send(send_data.encode(FORMAT))    
 
     print(f"[Disconnected] {addr} disconnected")
 
