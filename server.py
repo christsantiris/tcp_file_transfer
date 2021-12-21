@@ -26,12 +26,27 @@ def handle_client(conn, addr):
             send_data += "HELP: List all the commands."
 
             conn.send(send_data.encode(FORMAT))
+        elif cmd == "LOGOUT":
+            break
+        elif cmd == "LIST":
+            pass
+        elif cmd == "UPLOAD":
+            pass
+        elif cmd == "DELETE":
+            pass
+
+    print(f"[Disconnected] {addr} disconnected")
 
 def main():
     print("[Starting] Server is starting.")
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(ADDR)
-    server.listen()
+    try:
+        server.bind(ADDR)
+        server.listen()
+    except socket.error as msg:
+        print(f"Error socker.error {msg}")
+        return
+
     print("[Listening] Server is listening")
 
     while True:

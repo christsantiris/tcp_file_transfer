@@ -33,6 +33,15 @@ def main():
 
         if cmd == "HELP":
             client.send(cmd.encode(FORMAT))
+        elif cmd == "LOGOUT":
+            client.send(cmd.encode(FORMAT))
+            break
+        elif cmd == "LIST":
+            pass
+        elif cmd == "UPLOAD":
+            pass
+        elif cmd == "DELETE":
+            pass
             
     print("Disconnected from server.")
     client.close()
