@@ -13,6 +13,20 @@ def handle_client(conn, addr):
     print(f"[New Connection] {addr} connected.")
     conn.send("OK@Welcome to the File Server".encode(FORMAT))
 
+    while True:
+        data = conn.recv(SIZE).decode(FORMAT)
+        data = data.split("@")
+        cmd = data[0]
+        if cmd == "HELP":
+            send_data = "OK@"
+            send_data += "List: List all the files currently on the server.\n"
+            send_data += "UPLOAD <path>: Upload files to the server.\n"
+            send_data += "DELETE: <filename>: Delete a file from the server.\n"
+            send_data += "LOGOUT: Disconnect from the server.\n"
+            send_data += "HELP: List all the commands."
+
+            conn.send(send_data.encode(FORMAT))
+
 def main():
     print("[Starting] Server is starting.")
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
