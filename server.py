@@ -39,7 +39,18 @@ def handle_client(conn, addr):
                 send_data += "\n".join(f for f in files)
                 conn.send(send_data.encode(FORMAT))
         elif cmd == "UPLOAD":
-            pass
+            name, text = data[1], data[2]
+            print(name)
+            print(text)
+            filepath = os.path.join(SERVER_DATA_PATH, name)
+            print(SERVER_DATA_PATH)
+            print(name)
+            print(filepath)
+            with open(filepath, "w") as f:
+                f.write(text)
+
+            send_data = "OK@File uploaded successfully."
+            conn.send(send_data.encode(FORMAT))
         elif cmd == "DELETE":
             files = os.listdir(SERVER_DATA_PATH)
             send_data = "OK@"
