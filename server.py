@@ -19,7 +19,7 @@ def handle_client(conn, addr):
         cmd = data[0]
         if cmd == "HELP":
             send_data = "OK@"
-            send_data += "List: List all the files currently on the server.\n"
+            send_data += "LIST: List all the files currently on the server.\n"
             send_data += "UPLOAD <path>: Upload files to the server.\n"
             send_data += "DELETE: <filename>: Delete a file from the server.\n"
             send_data += "LOGOUT: Disconnect from the server.\n"

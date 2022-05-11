@@ -27,6 +27,7 @@ def main():
             print(f"{msg}")
             break
 
+        # input("> ") allows user to input text into prompt
         data = input("> ")
         data = data.split(" ")
         cmd = data[0]
